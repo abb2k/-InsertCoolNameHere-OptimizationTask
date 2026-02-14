@@ -13,13 +13,14 @@ public class PlayerCharacterController : MonoBehaviour
     public event UnityAction<int> onTakeDamageEventAction;
     [SerializeField] private UnityEvent<int> onTakeDamageEvent;
 
-    [Header("Navigation")] 
-    private NavMeshAgent navMeshAgent;
+    [Header("Navigation")]
+    [SerializeField] private NavMeshAgent navMeshAgent;
 
     [SerializeField] private Transform waypoint;
     [SerializeField] private Transform[] pathWaypoints;
     
-    private Animator animator;
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
 
     public int Hp
     {
@@ -40,7 +41,8 @@ public class PlayerCharacterController : MonoBehaviour
 
 
     private int hp;
-    private int startingHp;
+    [Header("Options")]
+    [SerializeField] private int startingHp;
 
     public void ToggleMoving(bool shouldMove)
     {
@@ -50,8 +52,9 @@ public class PlayerCharacterController : MonoBehaviour
 
     public void SetDestination(Transform targetTransformWaypoint)
     {
-        if (navMeshAgent)
-            navMeshAgent.SetDestination(targetTransformWaypoint.position);
+        if (!navMeshAgent) return;
+
+        navMeshAgent.SetDestination(targetTransformWaypoint.position);
     }
 
     public void SetDestination(int waypointIndex)
@@ -62,18 +65,18 @@ public class PlayerCharacterController : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         hp -= damageAmount;
+
         float hpPercentLeft = (float) hp / startingHp;
         animator.SetLayerWeight(1, (1 - hpPercentLeft));
+
         onTakeDamageEvent.Invoke(hp);
         onTakeDamageEventAction?.Invoke(hp);
     }
 
     private void Start()
     {
-        hp = 100;
-        animator = GetComponent<Animator>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        startingHp = hp;
+        hp = startingHp;
+
         SetMudAreaCost();
         ToggleMoving(true);
         SetDestination(pathWaypoints[0]);
@@ -81,10 +84,9 @@ public class PlayerCharacterController : MonoBehaviour
 
     private void SetMudAreaCost()
     {
-        if (hasBloodyBoots)
-        {
-            navMeshAgent.SetAreaCost(3, 1);
-        }
+        if (!hasBloodyBoots) return;
+        
+        navMeshAgent.SetAreaCost(3, 1);
     }
 
     [ContextMenu("Take Damage Test")]
@@ -106,26 +108,5 @@ public class PlayerCharacterController : MonoBehaviour
 
         if (animator)
             animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
-        
-        if (Camera.main != null)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f))
-            {
-                //We want to know what the mouse is hovering now
-                Debug.Log($"Hit: {hit.collider.name}");
-            }
-        }
-
-    }
-    
-    private void OnEnable()
-    {
-        
-    }
-
-    private void OnDisable()
-    {
-        
     }
 }
