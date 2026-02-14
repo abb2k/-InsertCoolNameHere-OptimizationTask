@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
     {
         foreach (FireHazard fireHazard in fireHazards)
         {
-            fireHazard.fireHazardData = 
-                fireHazardScriptableObjects[Random.Range(0, fireHazardScriptableObjects.Length)];
+            fireHazard.SetScriptableData(
+                fireHazardScriptableObjects[Random.Range(0, fireHazardScriptableObjects.Length)]
+            );
             fireHazard.onCharacterEnteredAction += HandleCharacterEnteredFire;
         }
       
@@ -26,5 +27,4 @@ public class GameManager : MonoBehaviour
     {
         args.targetCharacterController.TakeDamage(args.damageDealt);
     }
-    
 }

@@ -3,7 +3,7 @@ using UnityEngine.Animations;
 
 public class FallAndRiseBehaviour : StateMachineBehaviour
 {
-    PlayerCharacterController playerCharacterController;
+    private PlayerCharacterController playerCharacterController;
 
     public override void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
     {
@@ -20,11 +20,5 @@ public class FallAndRiseBehaviour : StateMachineBehaviour
         base.OnStateMachineExit(animator, stateMachinePathHash);
         
         playerCharacterController.ToggleMoving(true);
-    }
-
-    public override void OnStateMachineEnter(Animator animator, int stateMachinePathHash, AnimatorControllerPlayable controller)
-    {
-        base.OnStateMachineEnter(animator, stateMachinePathHash, controller);
-      
     }
 }

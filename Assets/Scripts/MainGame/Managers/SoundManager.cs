@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
-    private static string MASTER_VOLUME_PARAMETER = "MasterVolume";
-    private static string SFX_VOLUME_PARAMETER = "SFXVolume";
+    private const string MASTER_VOLUME_PARAMETER = "MasterVolume";
+    private const string SFX_VOLUME_PARAMETER = "SFXVolume";
     
     [SerializeField] private AudioMixerGroup mainMixer;
     [SerializeField] private AudioMixerGroup sfxMixer;

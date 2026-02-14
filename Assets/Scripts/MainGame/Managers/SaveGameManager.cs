@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using UnityEngine;
 
 public class SaveGameManager : MonoBehaviour
@@ -30,29 +27,29 @@ public class SaveGameManager : MonoBehaviour
         serializedSaveGame.playerHPNew = gameManager.playerCharacterController.Hp;
         serializedSaveGame.currentWaypointIndex = gameManager.playerCharacterController.CurrentWaypointIndex;
         
-          //  SaveToJson();
-         SaveToBinary();
+        // SaveToJson();
+        SaveToBinary();
     }
 
     [ContextMenu("Load!")]
     public void LoadGame()
     {
-       // LoadFromJson();
+        // LoadFromJson();
 
-         LoadFromBinary();
-        
-         // gameManager.playerCharacterController.transform.position = serializedSaveGame.playerPosition;
-         // gameManager.playerCharacterController.transform.eulerAngles = serializedSaveGame.playerRotation;
-         gameManager.playerCharacterController.transform.position = new Vector3(serializedSaveGame.playerPositionX,
-             serializedSaveGame.playerPositionY, serializedSaveGame.playerPositionZ);
-         gameManager.playerCharacterController.transform.eulerAngles = new Vector3(serializedSaveGame.playerRotationX,
-             serializedSaveGame.playerRotationY, serializedSaveGame.playerRotationZ);
-         gameManager.playerCharacterController.Hp = serializedSaveGame.playerHPNew;
-        
-         gameManager.playerCharacterController.CurrentWaypointIndex = serializedSaveGame.currentWaypointIndex;
-         //
-         uiManager.RefreshHPText(gameManager.playerCharacterController.Hp);
-         gameManager.playerCharacterController.SetDestination(gameManager.playerCharacterController.CurrentWaypointIndex);
+        LoadFromBinary();
+    
+        // gameManager.playerCharacterController.transform.position = serializedSaveGame.playerPosition;
+        // gameManager.playerCharacterController.transform.eulerAngles = serializedSaveGame.playerRotation;
+        gameManager.playerCharacterController.transform.position = new Vector3(serializedSaveGame.playerPositionX,
+            serializedSaveGame.playerPositionY, serializedSaveGame.playerPositionZ);
+        gameManager.playerCharacterController.transform.eulerAngles = new Vector3(serializedSaveGame.playerRotationX,
+            serializedSaveGame.playerRotationY, serializedSaveGame.playerRotationZ);
+        gameManager.playerCharacterController.Hp = serializedSaveGame.playerHPNew;
+    
+        gameManager.playerCharacterController.CurrentWaypointIndex = serializedSaveGame.currentWaypointIndex;
+        //
+        uiManager.RefreshHPText(gameManager.playerCharacterController.Hp);
+        gameManager.playerCharacterController.SetDestination(gameManager.playerCharacterController.CurrentWaypointIndex);
     }
 
     private void SaveToJson()

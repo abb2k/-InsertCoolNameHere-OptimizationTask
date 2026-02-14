@@ -12,31 +12,24 @@ public class FireHazard : MonoBehaviour
     [HideInInspector] public FireHazardScriptableObject fireHazardData;
 
     [SerializeField]
-    private UnityEvent<FireEnteredEventArgs> onCharacterEntered = new UnityEvent<FireEnteredEventArgs>();
+    private UnityEvent<FireEnteredEventArgs> onCharacterEntered;
 
-    // public void SetScriptableData(FireHazardScriptableObject fireHazardScriptableObject)
-    // {
-    //     fireHazardData = fireHazardScriptableObject;
-    // }
-    // private void Start()
-    // { 
-    //     if(onCharacterEnteredAction != null)
-    //        onCharacterEntered.AddListener(onCharacterEnteredAction);
-    // }
+    public void SetScriptableData(FireHazardScriptableObject fireHazardScriptableObject)
+    {
+        fireHazardData = fireHazardScriptableObject;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("PlayerCharacter"))
+        if (!other.gameObject.CompareTag("PlayerCharacter")) return;
+
+        FireEnteredEventArgs fireEnteredEventArgs = new FireEnteredEventArgs
         {
-            Debug.Log("Player entered this hazard");
-            FireEnteredEventArgs fireEnteredEventArgs = new FireEnteredEventArgs
-            {
-                damageDealt = fireHazardData.GetRandomFireDamage(),
-                targetCharacterController = other.GetComponent<PlayerCharacterController>()
-            };
-            onCharacterEntered?.Invoke(fireEnteredEventArgs);
-            onCharacterEnteredAction.Invoke(fireEnteredEventArgs);
-        }
+            damageDealt = fireHazardData.GetRandomFireDamage(),
+            targetCharacterController = other.GetComponent<PlayerCharacterController>()
+        };
+        onCharacterEntered?.Invoke(fireEnteredEventArgs);
+        onCharacterEnteredAction.Invoke(fireEnteredEventArgs);
     }
 }
 
