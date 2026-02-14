@@ -1,0 +1,11 @@
+﻿<Solution>
+  <Project Path="Unity.Addressables.Editor.csproj" />
+  <Project Path="Unity.Addressables.Editor.Tests.csproj" />
+  <Project Path="Unity.ResourceManager.csproj" />
+  <Project Path="Unity.Addressables.DocExampleCode.Editor.Tests.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Unity.ResourceManager.Tests.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Unity.Addressables.csproj" />
+  <Project Path="Unity.Addressables.Runtime.Tests.csproj" />
+</Solution>
