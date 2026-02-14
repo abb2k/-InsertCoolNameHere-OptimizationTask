@@ -4,9 +4,7 @@ public class ArrowObject : MonoBehaviour
 {
     public float speed;
     public float damage;
-    
-    [SerializeField]
-    private float killTimer;
+    [SerializeField] private float killTimer;
 
     void Start()
     {

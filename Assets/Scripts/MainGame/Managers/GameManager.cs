@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -20,7 +16,6 @@ public class GameManager : MonoBehaviour
             );
             fireHazard.onCharacterEnteredAction += HandleCharacterEnteredFire;
         }
-      
     }
 
     public void HandleCharacterEnteredFire(FireEnteredEventArgs args)
