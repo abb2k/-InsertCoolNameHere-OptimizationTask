@@ -1,20 +1,38 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ArrowObject : MonoBehaviour
 {
     public float speed;
     public float damage;
-    
-    [SerializeField]
-    private float killTimer;
+    private bool canMove;
+    private Coroutine currentMovementTimer = null;
 
-    void Start()
+    public event UnityAction<ArrowObject> OnMovementEnded;
+
+    public void StartMovement(float time)
     {
-        Destroy(gameObject, killTimer);
+        canMove = true;
+
+        if (currentMovementTimer != null) StopCoroutine(currentMovementTimer);
+        currentMovementTimer = StartCoroutine(MovementTimer(time));
     }
 
-    void Update()
+    private void Update()
     {
+        if (!canMove) return;
+
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    private IEnumerator MovementTimer(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        canMove = false;
+        OnMovementEnded?.Invoke(this);
+
+        currentMovementTimer = null;
     }
 }
