@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 
 public class ArrowHazard : MonoBehaviour
 {
-    public GameObject arrowPrefab;
+    [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private float shootInterval;
     private ObjectPool<ArrowObject> arrowsPool;
     [SerializeField] private float poolArrowAfter;

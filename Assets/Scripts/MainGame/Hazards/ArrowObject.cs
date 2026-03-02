@@ -4,8 +4,8 @@ using UnityEngine.Events;
 
 public class ArrowObject : MonoBehaviour
 {
-    public float speed;
-    public float damage;
+    [SerializeField] private float speed;
+    [SerializeField] private float damage;
     private bool canMove;
     private Coroutine currentMovementTimer = null;
 
