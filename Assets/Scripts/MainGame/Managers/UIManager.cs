@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public TextMeshProUGUI hpText;
-    
+    [SerializeField] private TMP_Text hpText;
     [SerializeField] private PlayerCharacterController bobby;
     [SerializeField] private SkillButtonUI[] skillsButtons;
     [SerializeField] private Sprite[] skillIcons;
@@ -26,8 +25,8 @@ public class UIManager : MonoBehaviour
         int index = 0;
         foreach (var skillBtn in skillsButtons)
         {
-            skillBtn.skillIcon.sprite = skillIcons[index];
-            skillBtn.skillNameText.text = $"Skill {index + 1}";
+            skillBtn.SkillIcon.sprite = skillIcons[index];
+            skillBtn.SkillNameText.text = $"Skill {index + 1}";
 
             index++;
         }
